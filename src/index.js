@@ -54,6 +54,7 @@ export default {
 					(i.name || i.original_name) || (i.title || i.original_title),
 					i.poster_path,
 					i.media_type,
+					i.release_date,
 					i.vote_avg
 				]);
 
