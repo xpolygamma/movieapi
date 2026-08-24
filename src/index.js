@@ -62,6 +62,8 @@ export default {
 			} else {
 				return makeResp({ success: false, error: resp.status_message });
 			}
+		} else if (data.path === 'list') {
+			return makeResp({ success: true, list: env.list });
 		}
 
 		return makeResp({ success: false });
