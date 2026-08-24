@@ -28,12 +28,13 @@ export default {
 
 		if (data.path === 'series') {
 			let id = await getid(data.query, env);
-			if (id[1] !== 'tv') return makeResp({ success: true, id: id[0], tv: false });
+
+			if (id[1] === 'movie') return makeResp({ success: true, id: id[0], tv: false });
 			id = id[0];
 
 			const resp = await tmdb(`/tv/${id}?language=en-GB`, env);
 
-			if (resp.success && resp.seasons) {
+			if (resp.seasons) {
 				let seasons = resp.seasons.map(s => [
 					s.season_number,
 					s.name,
@@ -79,6 +80,6 @@ async function getid(ref, env) {
 		return [resp.id, resp.media_type];
 	} else pid = parseInt(ref);
 
-	if (pid) return pid;
-	return null;
+	if (pid) return [pid, null];
+	return [null, null];
 }
