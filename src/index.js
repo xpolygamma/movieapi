@@ -9,7 +9,7 @@ function makeResp(json=null, status=200) {
 		JSON.stringify(json) || null,
 		{ status, headers: {
 			'Access-Control-Allow-Origin': '*',
-			'Access-Control-Allow-Methods': 'GET, OPTIONS',
+			'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
 			'Access-Control-Allow-Headers': '*'
 		}}
 	)
@@ -18,6 +18,9 @@ function makeResp(json=null, status=200) {
 export default {
 	async fetch(req, env, ctx) {
 		if (req.method === 'OPTIONS') return makeResp();
+
+		const posted = await req.json();
+		if (!posted?.key || posted.key !== env.key) makeResp({ success: false, key: false });
 
 		const url = new URL(req.url);
 		const data = {
