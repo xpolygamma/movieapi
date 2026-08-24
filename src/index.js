@@ -8,7 +8,7 @@ function makeResp(json=null, status=200) {
 	return new Response(
 		JSON.stringify(json) || null,
 		{ status, headers: {
-			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Origin': 'https://movie.bike',
 			'Access-Control-Allow-Methods': 'GET, OPTIONS',
 			'Access-Control-Allow-Headers': '*'
 		}}
